@@ -1,0 +1,23 @@
+{
+  "name": "digi-uni-automation",
+  "version": "1.0.0",
+  "description": "Vyuzitie automatizacie v digitalnom marketingu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pajerchin/digi-uni-automation.git"
+  },
+  "author": "Martin Pajerchin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pajerchin/digi-uni-automation/issues"
+  },
+  "homepage": "https://github.com/pajerchin/digi-uni-automation#readme",
+  "devDependencies": {
+    "cypress": "^10.3.0",
+    "newman": "^5.3.2"
+  }
+}
