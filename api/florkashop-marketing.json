@@ -1,0 +1,522 @@
+{
+	"info": {
+		"_postman_id": "218c60fa-8086-481b-8550-d574c36500ad",
+		"name": "Florkashop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11982828"
+	},
+	"item": [
+		{
+			"name": "check sitemap xml",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonObject = xml2Json(responseBody);",
+							"let sitemap = jsonObject.sitemapindex.sitemap",
+							"let loc = []",
+							"",
+							"sitemap.forEach(sitemap => {",
+							"    loc.push(sitemap.loc)",
+							"})",
+							"",
+							"loc.forEach(url => {",
+							"",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'HEAD'",
+							"    }",
+							"",
+							"    pm.test('Test sitemap.xml: ' + reqInfo.url , () => {",
+							"        pm.sendRequest(reqInfo, (err, res) => {",
+							"",
+							"            pm.expect(res.code).to.equal(200, `status code is: ${res.code}`)",
+							"            pm.expect(res.status).is.equal('OK')",
+							"        })",
+							"    })",
+							"})",
+							"     "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/sitemap_index.xml",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"sitemap_index.xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check products xml",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonObject = xml2Json(responseBody);",
+							"let url = jsonObject.urlset.url",
+							"let loc = []",
+							"",
+							"url.forEach(sitemap => {",
+							"    loc.push(sitemap.loc)",
+							"})",
+							"",
+							"pm.collectionVariables.set('productsUrl', loc)",
+							"",
+							"loc.forEach(url => {",
+							"",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'HEAD'",
+							"    }",
+							"",
+							"    pm.test('Test sitemap.xml: ' + reqInfo.url , () => {",
+							"        pm.sendRequest(reqInfo, (err, res) => {",
+							"",
+							"            pm.expect(res.code).to.equal(200, `status code is: ${res.code}`)",
+							"            pm.expect(res.status).is.equal('OK')",
+							"        })",
+							"    })",
+							"})",
+							"     "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/product-sitemap.xml",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"product-sitemap.xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check categories xml",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonObject = xml2Json(responseBody);",
+							"let url = jsonObject.urlset.url",
+							"let loc = []",
+							"",
+							"url.forEach(sitemap => {",
+							"    loc.push(sitemap.loc)",
+							"})",
+							"",
+							"loc.forEach(url => {",
+							"",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'HEAD'",
+							"    }",
+							"",
+							"    pm.test('Test sitemap.xml: ' + reqInfo.url , () => {",
+							"        pm.sendRequest(reqInfo, (err, res) => {",
+							"",
+							"            pm.expect(res.code).to.equal(200, `status code is: ${res.code}`)",
+							"            pm.expect(res.status).is.equal('OK')",
+							"        })",
+							"    })",
+							"})",
+							"     "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/product_cat-sitemap.xml",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"product_cat-sitemap.xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check pages xml",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonObject = xml2Json(responseBody);",
+							"let url = jsonObject.urlset.url",
+							"let loc = []",
+							"",
+							"url.forEach(sitemap => {",
+							"    loc.push(sitemap.loc)",
+							"})",
+							"",
+							"loc.forEach(url => {",
+							"",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'HEAD'",
+							"    }",
+							"",
+							"    pm.test('Test sitemap.xml: ' + reqInfo.url , () => {",
+							"        pm.sendRequest(reqInfo, (err, res) => {",
+							"",
+							"            pm.expect(res.code).to.equal(200, `status code is: ${res.code}`)",
+							"            pm.expect(res.status).is.equal('OK')",
+							"        })",
+							"    })",
+							"})",
+							"    "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/page-sitemap.xml",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"page-sitemap.xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check robots.txt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const robots = pm.response.text().split('\\r\\n')",
+							"",
+							"pm.test('check disallow bin data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /cgi-bin/', 'cgi bin missing')",
+							"})",
+							"",
+							"pm.test('check disallow wp-admin data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /wp-admin/', 'wp admin missing')",
+							"})",
+							"",
+							"pm.test('check disallow recommended data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /recommended/', 'recommended missing')",
+							"})",
+							"",
+							"pm.test('check disallow comments feed data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /comments/feed/', 'comments feed')",
+							"})",
+							"",
+							"pm.test('check disallow trackback data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /trackback/', 'trackback')",
+							"})",
+							"",
+							"pm.test('check disallow index.php data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /index.php', 'index.php missing')",
+							"})",
+							"",
+							"pm.test('check disallow xmlrpc data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /xmlrpc.php', 'xmlrpc.php missing')",
+							"})",
+							"",
+							"pm.test('check disallow wp-content data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /wp-content/', 'wp-content missing')",
+							"})",
+							"",
+							"pm.test('check disallow kosik data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /kosik/', 'kosik missing')",
+							"})",
+							"",
+							"pm.test('check disallow pokladna data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /pokladna/', 'pokladna missing')",
+							"})",
+							"",
+							"pm.test('check disallow moj-ucet data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /moj-ucet/', 'moj ucet missing')",
+							"})",
+							"",
+							"pm.test('check disallow wp-login data', () => {",
+							"    pm.expect(robots).to.include('Disallow: /wp-login.php', 'wp-login.php missing')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/robots.txt",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"robots.txt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check meta description/title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const urlProduct = pm.collectionVariables.get('productsUrl')",
+							"const urlPage = pm.collectionVariables.get('pagesUrl')",
+							"",
+							"const mergerUrl = urlProduct.concat(urlPage)",
+							"",
+							"mergerUrl.forEach(url => {",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }",
+							"",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"        const $ = cheerio.load(res.text());",
+							"",
+							"        const lengtDescription = $('meta[name=\"description\"]').attr('content').length",
+							"        const lengthTitle = $('title').text().length",
+							"",
+							"        pm.test(`Meta description url: ${reqInfo.url} is length than 160 characters`, () => {",
+							"            pm.expect(lengtDescription).is.lessThan(160)",
+							"        })",
+							"",
+							"        pm.test(`Title url: ${reqInfo.url} is length than 60 characters`, () => {",
+							"            pm.expect(lengthTitle).is.lessThan(60)",
+							"        })",
+							"",
+							"    })",
+							"    ",
+							"})",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check ssl certificate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Web has ssl certificate', () => {",
+							"    pm.expect(pm.request.url.protocol).is.equal('https')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check internal links",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const $ = cheerio.load(pm.response.text());",
+							"",
+							"$('a[href*=\"florkashop\"]').each(function() {",
+							"    let link = $(this).attr('href')",
+							"",
+							"    const reqInfo = {",
+							"        url: link,",
+							"        method: 'HEAD'",
+							"    }",
+							"    ",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"",
+							"        pm.test('Test internal links', () => {",
+							"            pm.expect(res.code).to.equal(200, `status code is: ${res.code}`)",
+							"            pm.expect(res.status).is.equal('OK')",
+							"        })",
+							"    })",
+							"",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check hreflang",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const $ = cheerio.load(pm.response.text());",
+							"",
+							"const hreflang = $('link[hreflang]').attr('hreflang')",
+							"",
+							"pm.test('Hreflang is equal SK', () => {",
+							"    pm.expect(hreflang).is.equal('sk-SK')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check canonical",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "check alt img",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "chek h1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", ()=> {",
+					"    pm.expect(pm.response.code).to.equal(200);",
+					"})",
+					"",
+					"pm.test('Response must be valid', ()=> {",
+					"    pm.expect(pm.response.to.be.ok)",
+					"})",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "prodUrl",
+			"value": "www.florkashop.sk",
+			"type": "string"
+		},
+		{
+			"key": "productsUrl",
+			"value": ""
+		},
+		{
+			"key": "pagesUrl",
+			"value": ""
+		}
+	]
+}
