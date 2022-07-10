@@ -37,7 +37,7 @@ jobs:
       with: 
         name: jest report
         path: newman/junit.xml
-        reporter: jest-juni
+        reporter: jest-junit
      
     - name: Output the run Details
       uses: actions/upload-artifact@v2
