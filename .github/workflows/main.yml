@@ -32,17 +32,19 @@ jobs:
       run: |
        newman run ./api/florkashop-marketing.json -e ./api/prod-env.json -r htmlextra,cli,junit --reporter-htmlextra-export newman/htmlreport.html --reporter-junit-export newman/junit.xml
        
-    - name: Test Report
-      uses: dorny/test-reporter@v1.5.0
-      if: always()
-      with:
-          name: Newman jest report     
-          path: newman/junit.xml
-          reporter: jest-junit       
-
     - name: Output the run Details
       uses: actions/upload-artifact@v2
       if: always()
       with:
        name: newman-test-results
        path: newman
+       
+    - name: Test Report
+      uses: dorny/test-reporter@v1.5.0
+      if: always()
+      with:
+          name: Newman jest report     
+          path: newman-test-results/junit.xml
+          reporter: jest-junit       
+
+
