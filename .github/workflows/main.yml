@@ -15,6 +15,8 @@ jobs:
         with:
           urls: https://www.florkashop.sk/
           budgetPath: ./budget.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
 
   api_tests:
     runs-on: ubuntu-latest
