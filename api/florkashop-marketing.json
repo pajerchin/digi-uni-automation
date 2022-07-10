@@ -361,7 +361,7 @@
 				}
 			],
 			"request": {
-				"method": "HEAD",
+				"method": "GET",
 				"header": [],
 				"url": {
 					"raw": "{{url}}",
