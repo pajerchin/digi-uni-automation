@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Lighthouse test
     steps:
-      - uses: treosh/lighthouse-ci-action@v9
+      - uses: treosh/lighthouse-ci-action@v8
         with:
           urls: https://www.florkashop.sk/
           budgetPath: 'budget.json'
