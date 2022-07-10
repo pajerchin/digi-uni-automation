@@ -33,11 +33,11 @@ jobs:
        newman run ./api/florkashop-marketing.json -e ./api/prod-env.json -r htmlextra,cli,junit --reporter-htmlextra-export newman/htmlreport.html --reporter-junit-export newman/junit.xml
        
     - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: success() || failure() 
+      uses: dorny/test-reporter@v1.5.0
+      if: always 
       with:
           name: Newman jest report     
-          path: newman/junit-*.xml
+          path: newman/junit.xml
           reporter: jest-junit       
 
     - name: Output the run Details
