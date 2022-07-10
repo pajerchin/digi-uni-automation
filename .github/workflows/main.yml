@@ -45,7 +45,7 @@ jobs:
       with:
           artifact: newman-test-results
           name: Newman jest report     
-          path: junit.xml
+          path: '*.xml'
           reporter: jest-junit
           
 
