@@ -34,10 +34,10 @@ jobs:
        
     - name: Test Report
       uses: dorny/test-reporter@v1
-      if: always()
+      if: success() || failure() 
       with:
           name: Newman jest report     
-          path: newman/junit.xml
+          path: newman/junit-*.xml
           reporter: jest-junit       
 
     - name: Output the run Details
