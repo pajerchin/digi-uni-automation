@@ -7,6 +7,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  lighthouse_test:
+    runs-on: ubuntu-latest
+    name: Lighthouse test
+    steps:
+      - uses: treosh/lighthouse-ci-action@v8
+        with:
+          configPath: "./lighthouse/config.json"
+          budgetPath: "./lighthouse/budget.json"
+
   api_tests:
     runs-on: ubuntu-latest
     name: Newman Test Execution
