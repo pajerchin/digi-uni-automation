@@ -32,20 +32,12 @@ jobs:
       run: |
        newman run ./api/florkashop-marketing.json -e ./api/prod-env.json -r htmlextra,cli,junit --reporter-htmlextra-export reports/htmlreport.html --reporter-junit-export reports/junit.xml
    
-#     - name: Publish Test Report
-#       uses: mikepenz/action-junit-report@v3
-#       if: always() 
-#       with:
-#          report_paths: 'newman/junit.xml'
-
-    - name: Test Report
-      uses: dorny/test-reporter@v1.4.0
-      if: success() || failure()    # run this step even if previous step failed
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v3
+      if: always() 
       with:
-        name: JEST Tests            # Name of the check run which will be created
-        path: 'reports/junit.xml'    # Path to test results
-        reporter: jest-junit 
-     
+         report_paths: 'reports/junit.xml'
+
     - name: Output the run Details
       uses: actions/upload-artifact@v2
       if: always()
