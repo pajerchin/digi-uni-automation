@@ -34,7 +34,7 @@ jobs:
        
     - name: Test Report
       uses: dorny/test-reporter@v1.5.0
-      if: always 
+      if: always()
       with:
           name: Newman jest report     
           path: newman/junit.xml
