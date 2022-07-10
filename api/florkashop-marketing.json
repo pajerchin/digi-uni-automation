@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "218c60fa-8086-481b-8550-d574c36500ad",
+		"_postman_id": "788b3849-b338-436e-823e-1608db75d343",
 		"name": "Florkashop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "11982828"
@@ -625,9 +625,9 @@
 					"script": {
 						"exec": [
 							"const urls = [",
-							"    '/moj-ucet/',",
-							"    '/moj-ucet/wishlist/',",
-							"    '/moj-ucet/lost-password/'",
+							"    'moj-ucet/',",
+							"    'moj-ucet/wishlist/',",
+							"    'moj-ucet/lost-password/'",
 							"]",
 							"",
 							"urls.forEach(url => {",
