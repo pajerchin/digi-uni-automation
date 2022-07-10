@@ -538,86 +538,6 @@
 			"response": []
 		},
 		{
-			"name": "chek h1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"const urlProduct = pm.collectionVariables.get('productsUrl')",
-							"const urlPage = pm.collectionVariables.get('pagesUrl')",
-							"",
-							"const mergerUrl = urlProduct.concat(urlPage)",
-							"",
-							"mergerUrl.forEach(url => {",
-							"    const reqInfo = {",
-							"        url: url,",
-							"        method: 'GET'",
-							"    }",
-							"",
-							"    pm.sendRequest(reqInfo, (err, res) => {",
-							"        const $ = cheerio.load(res.text());",
-							"",
-							"        const h1 = $('h1').length",
-							"",
-							"        pm.test(`H1 count on page ${url} is max one`, () => {",
-							"            pm.expect(h1).is.lessThan(2)",
-							"        })",
-							"",
-							"    })",
-							"    ",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}",
-					"host": [
-						"{{url}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "check alt img",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"const $ = cheerio.load(pm.response.text()); ",
-							"",
-							"$('img').each(function() {",
-							"    let alternateText = $(this).attr('alt')",
-							"",
-							"    pm.test('Img has alternate text', () => {",
-							"        pm.expect(alternateText).is.not.empty",
-							"    })",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}",
-					"host": [
-						"{{url}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "check meta tag robots",
 			"event": [
 				{
@@ -695,6 +615,86 @@
 						"produkt",
 						"pupava",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "chek h1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const urlProduct = pm.collectionVariables.get('productsUrl')",
+							"const urlPage = pm.collectionVariables.get('pagesUrl')",
+							"",
+							"const mergerUrl = urlProduct.concat(urlPage)",
+							"",
+							"mergerUrl.forEach(url => {",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }",
+							"",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"        const $ = cheerio.load(res.text());",
+							"",
+							"        const h1 = $('h1').length",
+							"",
+							"        pm.test(`H1 count on page ${url} is max one`, () => {",
+							"            pm.expect(h1).is.lessThan(2)",
+							"        })",
+							"",
+							"    })",
+							"    ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check alt img",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const $ = cheerio.load(pm.response.text()); ",
+							"",
+							"$('img').each(function() {",
+							"    let alternateText = $(this).attr('alt')",
+							"",
+							"    pm.test('Img has alternate text', () => {",
+							"        pm.expect(alternateText).is.not.empty",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
 					]
 				}
 			},
