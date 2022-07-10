@@ -14,7 +14,7 @@ jobs:
       - uses: treosh/lighthouse-ci-action@v8
         with:
           urls: https://www.florkashop.sk/
-          budgetPath: './budget.json'
+          budgetPath: '/home/runner/work/digi-uni-automation/digi-uni-automation/budget.json'
           uploadArtifacts: true
 
 
