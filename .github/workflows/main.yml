@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Lighthouse test
     steps:
-      - uses: treosh/lighthouse-ci-action@v8
+      - uses: treosh/lighthouse-ci-action@v9
         with:
-          configPath: "./lighthouse/config.json"
-          budgetPath: "./lighthouse/budget.json"
+          urls: https://www.florkashop.sk/
+          budgetPath: ./budget.json
 
   api_tests:
     runs-on: ubuntu-latest
