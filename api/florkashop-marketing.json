@@ -176,6 +176,8 @@
 							"    loc.push(sitemap.loc)",
 							"})",
 							"",
+							"pm.collectionVariables.set('pagesUrl', loc)",
+							"",
 							"loc.forEach(url => {",
 							"",
 							"    const reqInfo = {",
@@ -389,7 +391,7 @@
 							"    ",
 							"    pm.sendRequest(reqInfo, (err, res) => {",
 							"",
-							"        pm.test('Test internal links', () => {",
+							"        pm.test(`Link: ${link} has status code 200`, () => {",
 							"            pm.expect(res.code).to.equal(200, `status code is: ${res.code}`)",
 							"            pm.expect(res.status).is.equal('OK')",
 							"        })",
@@ -448,22 +450,43 @@
 		},
 		{
 			"name": "check canonical",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "check alt img",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "chek h1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const filterUrls = [",
+							"    '/sirupy/?orderby=popularity',",
+							"    'sirupy/?orderby=rating',",
+							"    '/sirupy/?orderby=date',",
+							"    '/sirupy/?orderby=price',",
+							"    '/sirupy/?orderby=price-desc'",
+							"]",
+							"",
+							"const canonical = 'https://www.florkashop.sk/sirupy/'",
+							"",
+							"filterUrls.forEach(url => {",
+							"    const reqInfo = {",
+							"        url: pm.environment.get('url') + url,",
+							"        method: 'GET'",
+							"    }",
+							"",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"        const $ = cheerio.load(res.text());",
+							"",
+							"        const canonicalLink = $('link[rel=\"canonical\"]').attr('href')",
+							"",
+							"        pm.test(`Filter ${url.split('?')[1]} has canonical ${canonicalLink}`, () => {",
+							"            pm.expect(canonicalLink).is.equal(canonical)",
+							"        })",
+							"    })",
+							"",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -471,6 +494,171 @@
 					"raw": "{{url}}",
 					"host": [
 						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "chek h1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const urlProduct = pm.collectionVariables.get('productsUrl')",
+							"const urlPage = pm.collectionVariables.get('pagesUrl')",
+							"",
+							"const mergerUrl = urlProduct.concat(urlPage)",
+							"",
+							"mergerUrl.forEach(url => {",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }",
+							"",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"        const $ = cheerio.load(res.text());",
+							"",
+							"        const h1 = $('h1').length",
+							"",
+							"        pm.test(`H1 count on page ${url} is max one`, () => {",
+							"            pm.expect(h1).is.lessThan(2)",
+							"        })",
+							"",
+							"    })",
+							"    ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check alt img",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const $ = cheerio.load(pm.response.text()); ",
+							"",
+							"console.log($('img').attr('alt'))",
+							"",
+							"$('img').each(function() {",
+							"    let alternateText = $(this).attr('alt')",
+							"",
+							"    pm.test('Img has alternate text', () => {",
+							"        pm.expect(alternateText).is.not.empty",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check meta tag robots",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const urls = [",
+							"    '/moj-ucet/',",
+							"    '/moj-ucet/wishlist/',",
+							"    '/moj-ucet/lost-password/'",
+							"]",
+							"",
+							"urls.forEach(url => {",
+							"",
+							"    const reqInfo = {",
+							"        url: pm.environment.get('url') + url,",
+							"        method: 'GET'",
+							"    }",
+							"   ",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"        const $ = cheerio.load(res.text());",
+							"",
+							"        const robots = $('meta[name=\"robots\"]').attr('content')",
+							"",
+							"        pm.test(`Meta tag robots contain noindex`, () => {",
+							"            pm.expect(robots).to.contain('noindex')",
+							"        })",
+							"    })",
+							"",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check 404 redirect",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const $ = cheerio.load(pm.response.text());",
+							"const title = $('title').text()",
+							"",
+							"pm.test('Title contains sirupy', () => {",
+							"    pm.expect(title).to.contain('Sirupy')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/produkt/pupava/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produkt",
+						"pupava",
+						""
 					]
 				}
 			},
