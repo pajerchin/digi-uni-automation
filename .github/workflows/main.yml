@@ -39,14 +39,17 @@ jobs:
        name: newman-test-results
        path: newman
        
-    - name: Test Report
-      uses: dorny/test-reporter@v1.5.0
-      if: always()
+  report:
+    name: Workflow test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./
       with:
-          artifact: newman-test-results
-          name: Newman jest report     
-          path: '*.xml'
-          reporter: jest-junit
+        artifact: newman-test-results
+        name: Newman junit report
+        path: 'junit.xml'
+        reporter: jest-junit
           
 
 
