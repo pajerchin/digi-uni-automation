@@ -593,8 +593,6 @@
 						"exec": [
 							"const $ = cheerio.load(pm.response.text()); ",
 							"",
-							"console.log($('img').attr('alt'))",
-							"",
 							"$('img').each(function() {",
 							"    let alternateText = $(this).attr('alt')",
 							"",
@@ -718,13 +716,6 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"pm.test(\"Status code is 200\", ()=> {",
-					"    pm.expect(pm.response.code).to.equal(200);",
-					"})",
-					"",
-					"pm.test('Response must be valid', ()=> {",
-					"    pm.expect(pm.response.to.be.ok)",
-					"})",
 					""
 				]
 			}
