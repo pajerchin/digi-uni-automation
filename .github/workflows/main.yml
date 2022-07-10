@@ -1,0 +1,48 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Automated digital marketing
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+
+jobs:
+  api_tests :
+    runs-on: ubuntu-latest
+    name: Newman Test Execution
+    steps:
+    
+    - uses: actions/checkout@v2
+      
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '12.x'
+    
+    - name: Install newman and htmlextra repoter
+      run: |
+       npm install -g newman
+       npm install -g newman-reporter-htmlextra
+       
+    - name: Make Directory for test results
+      run: mkdir -p newman
+      
+    - name: Run postman collection
+      if: always()
+      run: |
+       newman run ./dashboard.postman_collection.json -e ./prod.postman_environment.json -r htmlextra,cli,junit --reporter-htmlextra-export newman/htmlreport.html --reporter-junit-export newman/junit.xml
+       
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+          name: Newman jest report     
+          path: newman/junit.xml
+          reporter: jest-junit       
+
+    - name: Output the run Details
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+       name: newman-test-results
+       path: newman
