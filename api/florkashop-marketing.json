@@ -177,6 +177,7 @@
 							"})",
 							"",
 							"pm.collectionVariables.set('pagesUrl', loc)",
+							"console.log(loc)",
 							"",
 							"loc.forEach(url => {",
 							"",
@@ -621,55 +622,6 @@
 			"response": []
 		},
 		{
-			"name": "chek h1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"const urlProduct = pm.collectionVariables.get('productsUrl')",
-							"const urlPage = pm.collectionVariables.get('pagesUrl')",
-							"",
-							"const mergerUrl = urlProduct.concat(urlPage)",
-							"const timeoutMl = 1000",
-							"",
-							"",
-							"mergerUrl.forEach(url => {",
-							"    const reqInfo = {",
-							"        url: url,",
-							"        method: 'GET'",
-							"    }",
-							"",
-							"    pm.sendRequest(reqInfo, (err, res) => {",
-							"        const $ = cheerio.load(res.text());",
-							"",
-							"        const h1 = $('h1').length",
-							"",
-							"        pm.test(`H1 count on page ${url} is max one`, () => {",
-							"            pm.expect(h1).is.lessThan(2)",
-							"        })",
-							"",
-							"    })",
-							"    ",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}",
-					"host": [
-						"{{url}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "check alt img",
 			"event": [
 				{
@@ -689,6 +641,53 @@
 							"    pm.test('Img has alternate text', () => {",
 							"        pm.expect(text).is.not.empty",
 							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "chek h1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const urlProduct = pm.collectionVariables.get('productsUrl')",
+							"const urlPage = pm.collectionVariables.get('pagesUrl')",
+							"",
+							"const mergerUrl = urlProduct.concat(urlPage)",
+							"",
+							"mergerUrl.forEach(url => {",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }",
+							"",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"        const $ = cheerio.load(res.text());",
+							"",
+							"        const h1 = $('h1').length",
+							"",
+							"        pm.test(`H1 count on page ${url} is max one`, () => {",
+							"            pm.expect(h1).is.lessThan(2)",
+							"        })",
+							"",
+							"    })",
+							"    ",
 							"})"
 						],
 						"type": "text/javascript"
@@ -736,11 +735,11 @@
 		},
 		{
 			"key": "productsUrl",
-			"value": ""
+			"value": "https://www.florkashop.sk/katalog/,https://www.florkashop.sk/produkt/aronia/,https://www.florkashop.sk/produkt/baza-cierna/,https://www.florkashop.sk/produkt/ceresna/,https://www.florkashop.sk/produkt/cucoriedka/,https://www.florkashop.sk/produkt/echinacea/,https://www.florkashop.sk/produkt/levandula/,https://www.florkashop.sk/produkt/lipa-malolista/,https://www.florkashop.sk/produkt/materina-duska/,https://www.florkashop.sk/produkt/medovka/,https://www.florkashop.sk/produkt/morusa/,https://www.florkashop.sk/produkt/nechtik/,https://www.florkashop.sk/produkt/rakytnik/,https://www.florkashop.sk/produkt/rumancek/,https://www.florkashop.sk/produkt/sipka/,https://www.florkashop.sk/produkt/skorocel/,https://www.florkashop.sk/produkt/zihlava/,https://www.florkashop.sk/produkt/salvia/,https://www.florkashop.sk/produkt/antistresovy-balicek/,https://www.florkashop.sk/produkt/balicek-na-prechladnutie-a-chripku/,https://www.florkashop.sk/produkt/antivirusovy-balicek/,https://www.florkashop.sk/produkt/balicek-pre-zeny/,https://www.florkashop.sk/produkt/detoxikacny-balicek/,https://www.florkashop.sk/produkt/darcekovy-balicek/"
 		},
 		{
 			"key": "pagesUrl",
-			"value": ""
+			"value": "https://www.florkashop.sk/,https://www.florkashop.sk/moj-ucet/,https://www.florkashop.sk/katalog/,https://www.florkashop.sk/o-nas/,https://www.florkashop.sk/ochrana-osobnych-udajov/,https://www.florkashop.sk/reklamacny-poriadok/,https://www.florkashop.sk/kosik/,https://www.florkashop.sk/kontakt/,https://www.florkashop.sk/faq/"
 		}
 	]
 }
