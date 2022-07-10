@@ -43,8 +43,10 @@ jobs:
       uses: dorny/test-reporter@v1.5.0
       if: always()
       with:
+          artifact: newman-test-results
           name: Newman jest report     
-          path: newman-test-results/junit.xml
-          reporter: jest-junit       
+          path: junit.xml
+          reporter: jest-junit
+          
 
 
