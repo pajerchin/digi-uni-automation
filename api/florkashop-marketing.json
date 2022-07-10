@@ -291,61 +291,6 @@
 			"response": []
 		},
 		{
-			"name": "check meta description/title",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"const urlProduct = pm.collectionVariables.get('productsUrl')",
-							"const urlPage = pm.collectionVariables.get('pagesUrl')",
-							"",
-							"const mergerUrl = urlProduct.concat(urlPage)",
-							"",
-							"mergerUrl.forEach(url => {",
-							"    const reqInfo = {",
-							"        url: url,",
-							"        method: 'GET'",
-							"    }",
-							"",
-							"    pm.sendRequest(reqInfo, (err, res) => {",
-							"        const $ = cheerio.load(res.text());",
-							"",
-							"        const lengtDescription = $('meta[name=\"description\"]').attr('content').length",
-							"        const lengthTitle = $('title').text().length",
-							"",
-							"        pm.test(`Meta description url: ${reqInfo.url} is length than 160 characters`, () => {",
-							"            pm.expect(lengtDescription).is.lessThan(160)",
-							"        })",
-							"",
-							"        pm.test(`Title url: ${reqInfo.url} is length than 60 characters`, () => {",
-							"            pm.expect(lengthTitle).is.lessThan(60)",
-							"        })",
-							"",
-							"    })",
-							"    ",
-							"})",
-							"",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}",
-					"host": [
-						"{{url}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "check ssl certificate",
 			"event": [
 				{
@@ -436,6 +381,61 @@
 							"",
 							"    console.warn(errorArray.join('\\n'))",
 							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check meta description/title",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const urlProduct = pm.collectionVariables.get('productsUrl')",
+							"const urlPage = pm.collectionVariables.get('pagesUrl')",
+							"",
+							"const mergerUrl = urlProduct.concat(urlPage)",
+							"",
+							"mergerUrl.forEach(url => {",
+							"    const reqInfo = {",
+							"        url: url,",
+							"        method: 'GET'",
+							"    }",
+							"",
+							"    pm.sendRequest(reqInfo, (err, res) => {",
+							"        const $ = cheerio.load(res.text());",
+							"",
+							"        const lengtDescription = $('meta[name=\"description\"]').attr('content').length",
+							"        const lengthTitle = $('title').text().length",
+							"",
+							"        pm.test(`Meta description url: ${reqInfo.url} is length than 160 characters`, () => {",
+							"            pm.expect(lengtDescription).is.lessThan(160)",
+							"        })",
+							"",
+							"        pm.test(`Title url: ${reqInfo.url} is length than 60 characters`, () => {",
+							"            pm.expect(lengthTitle).is.lessThan(60)",
+							"        })",
+							"",
+							"    })",
+							"    ",
+							"})",
+							"",
 							"",
 							""
 						],
