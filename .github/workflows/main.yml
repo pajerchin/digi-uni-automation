@@ -9,7 +9,7 @@ on:
 jobs:
   lighthouse_test:
     runs-on: ubuntu-latest
-    name: Lighthouse test
+    name: Performance test
     steps:
       - uses: actions/checkout@v2
       - name: Audit URLs using Lighthouse
@@ -21,9 +21,9 @@ jobs:
           uploadArtifacts: true
 
 
-  api_tests:
+  SEO:
     runs-on: ubuntu-latest
-    name: Newman Test Execution
+    name: Technical SEO tests
     steps:
       - uses: actions/checkout@v2
 
