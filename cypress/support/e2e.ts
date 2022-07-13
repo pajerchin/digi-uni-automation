@@ -1,4 +1,5 @@
 import '../utils/screenloger.utils';
+import '../commands/base.commands';
 
 Cypress.on('uncaught:exception', () => {
     // returning false here prevents Cypress from

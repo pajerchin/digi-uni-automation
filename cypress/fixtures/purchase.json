@@ -1,0 +1,24 @@
+{
+  "event": "purchase",
+  "ecommerce": {
+    "currency": "EUR",
+    "items": [
+      {
+        "item_id": 299,
+        "item_name": "Lipový bylinkový sirup",
+        "item_brand": "",
+        "price": 6,
+        "item_category": "Upokojujúci",
+        "quantity": 1,
+        "google_business_vertical": "retail",
+        "id": "299"
+      }
+    ],
+    "transaction_id": "601",
+    "affiliation": "",
+    "value": 6,
+    "tax": 0,
+    "shipping": 0,
+    "coupon": ""
+  }
+}
