@@ -31,7 +31,7 @@ jobs:
         env:
           SLACK_CHANNEL: digitalna-univerzita
           SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: digi.png
+          SLACK_ICON: https://github.com/pajerchin/digi-uni-automation/blob/main/digi.png
           SLACK_MESSAGE: "Tests for GA4 order floe :rocket:"
           SLACK_TITLE: GA4 tests
           SLACK_USERNAME: digitalna-univerzita
@@ -54,7 +54,7 @@ jobs:
         env:
           SLACK_CHANNEL: digitalna-univerzita
           SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: digi.png
+          SLACK_ICON: https://github.com/pajerchin/digi-uni-automation/blob/main/digi.png
           SLACK_MESSAGE: "Performance tests :rocket:"
           SLACK_TITLE: Performance test
           SLACK_USERNAME: digitalna-univerzita
@@ -101,7 +101,7 @@ jobs:
         env:
           SLACK_CHANNEL: digitalna-univerzita
           SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: digi.png
+          SLACK_ICON: https://github.com/pajerchin/digi-uni-automation/blob/main/digi.png
           SLACK_MESSAGE: "Technical SEO tests :rocket:"
           SLACK_TITLE: SEO tests
           SLACK_USERNAME: digitalna-univerzita
