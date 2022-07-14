@@ -77,24 +77,3 @@ jobs:
           name: newman
           path: reports
 
-  slackNotification:
-    name: Slack Notification
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
-
-  SLack:
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_CHANNEL: digitalna-univerzita
-        SLACK_COLOR: ${{ job.status }}
-        SLACK_ICON: digi.png
-        SLACK_MESSAGE: "Tests for digital marketing finish :rocket:"
-        SLACK_TITLE: Marketing tests
-        SLACK_USERNAME: digitalna-univerzita
-        SLACK_WEBHOOK: https://hooks.slack.com/services/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
