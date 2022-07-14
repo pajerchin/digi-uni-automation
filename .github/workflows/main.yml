@@ -35,7 +35,7 @@ jobs:
           SLACK_MESSAGE: "Tests for GA4 order floe :rocket:"
           SLACK_TITLE: GA4 tests
           SLACK_USERNAME: digitalna-univerzita
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   lighthouse:
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
           SLACK_MESSAGE: "Performance tests :rocket:"
           SLACK_TITLE: Performance test
           SLACK_USERNAME: digitalna-univerzita
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   newman:
     runs-on: ubuntu-latest
@@ -105,5 +105,5 @@ jobs:
           SLACK_MESSAGE: "Technical SEO tests :rocket:"
           SLACK_TITLE: SEO tests
           SLACK_USERNAME: digitalna-univerzita
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
