@@ -5,8 +5,8 @@ name: Automated digital marketing
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [wordpress]
+  #repository_dispatch:
+   # types: [wordpress]
 
 jobs:
   cypress:
