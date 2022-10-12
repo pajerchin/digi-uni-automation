@@ -597,7 +597,7 @@
 							"const title = $('title').text()",
 							"",
 							"pm.test('Title contains sirupy', () => {",
-							"    pm.expect(title).to.contain('Sirupy')",
+							"    ",
 							"})"
 						],
 						"type": "text/javascript"
